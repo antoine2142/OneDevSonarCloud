@@ -54,6 +54,7 @@ import io.onedev.k8shelper.Action;
 import io.onedev.k8shelper.CommandExecutable;
 import io.onedev.k8shelper.CommandVisitor;
 import io.onedev.k8shelper.CompositeExecutable;
+import io.onedev.k8shelper.ExecuteCondition;
 import io.onedev.server.OneDev;
 import io.onedev.server.buildspec.job.CacheSpec;
 import io.onedev.server.buildspec.job.EnvVar;
@@ -809,7 +810,7 @@ public class KubernetesExecutor extends JobExecutor implements Testable<TestData
 					List<Action> actions = new ArrayList<>();
 					CommandExecutable executable = new CommandExecutable((String) executionContext, 
 							Lists.newArrayList("this does not matter"));
-					actions.add(new Action(true, executable));
+					actions.add(new Action(executable, ExecuteCondition.ALWAYS));
 					entryExecutable = new CompositeExecutable(actions);
 				}
 				

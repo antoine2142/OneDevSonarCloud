@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import io.onedev.k8shelper.Action;
 import io.onedev.k8shelper.Executable;
+import io.onedev.k8shelper.ExecuteCondition;
 import io.onedev.server.buildspec.BuildSpec;
 import io.onedev.server.web.editable.annotation.Editable;
 
@@ -26,6 +27,6 @@ public abstract class Step implements Serializable {
 	}
 	
 	public Action getAction(BuildSpec buildSpec) {
-		return new Action(alwaysExecute, getExecutable(buildSpec));
+		return new Action(getExecutable(buildSpec), this.alwaysExecute ? ExecuteCondition.ALWAYS : ExecuteCondition.ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL);
 	}
 }
